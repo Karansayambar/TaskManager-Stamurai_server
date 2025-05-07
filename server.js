@@ -25,8 +25,8 @@ app.use(cookieParser());
 
 app.use(
   cors({
-    // origin: "https://task-manager-frontend-app-e95m.onrender.com" , //Frontend URL
-    origin: "http://localhost:3000",
+    origin: "https://task-manager-stamurai-client.vercel.app", //Frontend URL
+    // origin: "http://localhost:3000",
     credentials: true, // Allow credentials (cookies, headers)
   })
 );
