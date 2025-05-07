@@ -46,6 +46,10 @@ const todoSchema = new Schema(
       ref: "User",
       required: true,
     },
+    assignedBy: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "User",
+    },
   },
   {
     timestamps: true,

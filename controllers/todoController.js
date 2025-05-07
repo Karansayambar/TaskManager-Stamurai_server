@@ -15,7 +15,6 @@ const { todoDataValidation } = require("../utils/todoDataValidation");
 const createTodoController = async (req, res) => {
   const { taskTitle, taskDesc, isImportant, dueDate, priority, assignedTo } =
     req.body;
-  console.log("create-todo", req.body);
   const userId = req.user._id;
 
   try {
@@ -36,6 +35,7 @@ const createTodoController = async (req, res) => {
       userId,
       assignedTo,
     });
+    console.log("todoDB", todoDb);
 
     return res.status(201).send({
       message: "TODO Created Successfully",
@@ -123,8 +123,6 @@ const updateCompletedStatus = async (req, res) => {
       message: "Todo Updated Successfully",
       data: editTodoDb,
     });
-
-    console.log("editrd to from completed status", editTodoDb);
   } catch (error) {
     return res.status(500).send({
       message: "Internal Server Error",

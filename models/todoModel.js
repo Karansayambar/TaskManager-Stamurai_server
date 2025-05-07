@@ -23,6 +23,7 @@ const createTodo = ({
       dueDate: dueDate || null,
       userId,
       assignedTo,
+      assignedBy: userId,
     });
 
     todoObj.save().then(resolve).catch(reject);
@@ -38,7 +39,6 @@ const getTodoById = ({ todoId }) => {
     try {
       const todoDB = await todoSchema.findOne({ _id: todoId });
       if (!todoDB) reject(`Todo Not Found with this ID${todoId}`);
-      console.log("todoDb", todoDB);
       return resolve(todoDB);
     } catch (error) {
       return reject(error);
@@ -67,10 +67,18 @@ const readAssignedTask = (userId) => {
   return new Promise(async (resolve, reject) => {
     try {
       // console.log("assignedTo", assignedTo);
-      const tasks = await todoSchema.find({ assignedTo: userId });
+      const tasks = await todoSchema
+        .find({ assignedTo: userId })
+        .populate({
+          path: "assignedBy",
+          select: "username email",
+          model: "User",
+        })
+        .lean(); // Convert to plain JavaScript objects;
       if (!tasks) {
         reject("No Tasks found");
       }
+      console.log("tasks from read assigned tasks", tasks);
       resolve(tasks);
     } catch (error) {
       reject(error);
