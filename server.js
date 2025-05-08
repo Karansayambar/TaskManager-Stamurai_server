@@ -31,17 +31,6 @@ app.use(
   })
 );
 
-// app.use(
-//   cors({
-//     origin: "http://localhost:3000",
-//     // origin: "https://task-manager-stamurai-client.vercel.app",
-//     credentials: true,
-//     // Add these for better security and functionality:
-//     methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
-//     allowedHeaders: ["Content-Type", "Authorization"],
-//   })
-// );
-
 app.set("trust proxy", 1);
 
 app.get("/", (req, res) => {
